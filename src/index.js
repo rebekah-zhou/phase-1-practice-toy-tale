@@ -15,13 +15,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
+  const toyIdArray = []
+  let toyCounter = 0
+  const toyCollection = document.querySelector('#toy-collection')
+
   fetch('http://localhost:3000/toys')
     .then(res => res.json())
     .then(toys => {
-      const toyCollection = document.querySelector('#toy-collection')
+    
       toys.forEach(toy => {
         toyCard = createToyCard(toy)
         toyCollection.append(toyCard)
+        toyIdArray.push(++toyCounter)
       })
        
       function createToyCard(obj) {
@@ -40,9 +45,46 @@ document.addEventListener("DOMContentLoaded", () => {
         buttonId.id = obj.id
         buttonId.textContent = 'Like ❤️'
         cardDiv.append(h2Name, imgAvatar, pLikes, buttonId)
-        console.log(cardDiv)
+
         return cardDiv
       }
+    })
+
+    const newToySubmit = document.querySelector("form.add-toy-form")
+    newToySubmit.addEventListener('submit', e => {
+      
+      e.preventDefault()
+      const newToyName = document.querySelector("form.add-toy-form input[name='name']")
+      const newToyImage = document.querySelector("form.add-toy-form input[name='image']")
+      addToy = !addToy;
+      toyFormContainer.style.display = "none";
+
+      const newToy = {
+        id: ++toyCounter,
+        name: newToyName.value,
+        image: newToyImage.value,
+        likes: 0
+      }
+
+      console.log(newToy)
+
+      const configObj = {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify(newToy)
+      }
+
+      fetch('http://localhost:3000/toys', configObj)
+        .then(() => {
+          const newToyCard = createToyCard(newToy)
+          toyCollection.append(newToyCard)
+          toyIdArray.push(toyCounter)
+          console.log(toyIdArray)
+        })
+    
     })
     
 

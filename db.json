@@ -47,6 +47,12 @@
       "name": "Little Green Men",
       "image": "http://www.pngmart.com/files/3/Toy-Story-Alien-PNG-File.png",
       "likes": 1
+    },
+    {
+      "id": 9,
+      "name": "Jessie",
+      "image": "https://images.thdstatic.com/productImages/d89f88e1-939e-4307-a493-4dcc9acd771f/svn/multi-roommates-wall-decals-rmk1432gm-64_600.jpg",
+      "likes": 0
     }
   ]
 }
