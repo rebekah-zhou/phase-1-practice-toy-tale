@@ -86,6 +86,14 @@ document.addEventListener("DOMContentLoaded", () => {
         })
     
     })
-    
+  
+  const idButton = document.querySelectorAll('#toy-collection div button')
+  idButton.forEach(button => {
+    console.log(button)
+    button.addEventListener('click', e => {
+    console.log(e.target)
+    })
+  })
+  
 
 });
